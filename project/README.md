@@ -162,12 +162,3 @@ Then open **http://127.0.0.1:5000** in your browser.
 
 ---
 
-## 7. Notes for Your Viva
-
-- Every dataset here is small and synthetic (except Iris) *on purpose* — so you can explain every
-  row and every feature confidently, and so the algorithms run instantly.
-- The homepage's "How it works" flow diagram is a genuinely accurate description of what happens
-  on every button click — walk through it live as a demo.
-- The Hierarchical Clustering page is a good closer: it shows the algorithm rediscovering the real
-  Iris species with ~90%+ purity *without ever being told what a species is* — a clean way to show
-  a panel what "unsupervised" really means.
