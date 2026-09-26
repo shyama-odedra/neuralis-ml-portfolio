@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block title %}Logistic Regression — Neuralis{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/logistic_regression.css') }}">{% endblock %}
+
+{% block content %}
+<section class="page-hero log-hero">
+  <div class="log-shape s1"></div>
+  <div class="log-shape s2"></div>
+  <div class="container">
+    <a href="/" class="back-link">← Back to home</a>
+    <div class="page-kicker">Supervised Learning · Classification</div>
+    <h1>Logistic Regression</h1>
+    <p class="lead">Predicts a category — here, whether a student will Pass or Fail — by learning a
+    decision boundary that separates the two outcomes based on study hours and attendance.</p>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="workspace">
+
+      <div class="panel reveal">
+        <h3>🎓 Student Profile</h3>
+        <p class="sub">Adjust study hours and attendance, then classify the outcome.</p>
+
+        <div class="field">
+          <label>Hours Studied (per day) <span class="val" id="hoursVal">6</span></label>
+          <input type="range" id="hoursRange" min="0" max="12" step="0.5" value="6">
+        </div>
+        <div class="field">
+          <label>Attendance (%) <span class="val" id="attVal">75</span></label>
+          <input type="range" id="attRange" min="0" max="100" step="1" value="75">
+        </div>
+
+        <button class="btn btn-primary run-btn" id="classifyBtn">Classify Outcome →</button>
+
+        <div class="loading-wrap" id="loadingWrap">
+          <div class="spinner"></div>
+          <span>Running R model (glm, logistic) on training data…</span>
+        </div>
+        <div class="error-banner" id="errorBanner"></div>
+      </div>
+
+      <div class="panel results" id="resultsPanel">
+        <h3>📈 Classification Result</h3>
+
+        <div class="center" style="margin-bottom:18px;">
+          <span class="class-chip" id="classChip"><span class="pulse"></span><span id="classText">—</span></span>
+        </div>
+
+        <div class="metric-row">
+          <div class="metric-card highlight">
+            <div class="label">Probability of Pass</div>
+            <div class="value" id="mProb">—</div>
+          </div>
+          <div class="metric-card">
+            <div class="label">Model Accuracy</div>
+            <div class="value" id="mAcc">—</div>
+          </div>
+        </div>
+
+        <div class="explanation" id="explanationBox"></div>
+
+        <div class="chart-wrap">
+          <canvas id="clsChart" height="260"></canvas>
+        </div>
+        <div class="legend-row">
+          <span><span class="legend-dot" style="background:#78d6a8;"></span>Passed (training)</span>
+          <span><span class="legend-dot" style="background:#ff9a76;"></span>Failed (training)</span>
+          <span><span class="legend-dot" style="background:#f0709b;"></span>Decision boundary</span>
+          <span><span class="legend-dot" style="background:#2c2740;"></span>Your student</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="info-tabs reveal">
+      <button class="info-tab-btn active" data-tab="how">How it Works</button>
+      <button class="info-tab-btn" data-tab="dataset">Dataset</button>
+      <button class="info-tab-btn" data-tab="real">Real-World Use</button>
+    </div>
+
+    <div class="info-tab-panel active" id="tab-how">
+      <div class="panel">
+        <p>Logistic Regression fits an S-shaped (sigmoid) curve instead of a straight line, so its
+        output is always squeezed between 0 and 1 — a probability. It computes a weighted sum of the
+        inputs, <code>z = b₀ + b₁·hours + b₂·attendance</code>, then passes that through the sigmoid
+        function to get a probability of passing. If that probability is ≥ 0.5, the model predicts
+        "Pass"; otherwise "Fail". The line where the probability is exactly 0.5 is the
+        <strong>decision boundary</strong> shown on the chart.</p>
+      </div>
+    </div>
+
+    <div class="info-tab-panel" id="tab-dataset">
+      <div class="panel">
+        <table class="dataset-table">
+          <tr><th>Property</th><th>Value</th></tr>
+          <tr><td>Dataset name</td><td>Student Performance (synthetic, realistic)</td></tr>
+          <tr><td>Rows</td><td>160 students</td></tr>
+          <tr><td>Columns</td><td>3 — hours_studied, attendance_percent, passed</td></tr>
+          <tr><td>Features used</td><td>hours_studied, attendance_percent</td></tr>
+          <tr><td>Target variable</td><td>passed (0 = Fail, 1 = Pass)</td></tr>
+          <tr><td>Why this dataset</td><td>Only two features means the decision boundary can be drawn directly on a 2D chart — great for a viva.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="info-tab-panel" id="tab-real">
+      <div class="real-world-box">
+        <strong>Where this is used in the real world</strong>
+        Email spam filters, loan default/credit approval, disease diagnosis screening, and customer
+        churn prediction all rely on logistic regression as a simple, well-calibrated classifier.
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/logistic_regression.js') }}"></script>
+{% endblock %}

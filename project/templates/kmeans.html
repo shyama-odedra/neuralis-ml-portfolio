@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block title %}K-Means Clustering — Neuralis{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/kmeans.css') }}">{% endblock %}
+
+{% block content %}
+<section class="page-hero km-hero">
+  <div class="km-particle" style="width:100px;height:100px;background:var(--mint);top:14%;left:8%;"></div>
+  <div class="km-particle" style="width:70px;height:70px;background:var(--powder-blue);bottom:12%;right:12%;animation-delay:-3s;"></div>
+  <div class="container">
+    <a href="/" class="back-link">← Back to home</a>
+    <div class="page-kicker">Unsupervised Learning · Clustering</div>
+    <h1>K-Means Clustering</h1>
+    <p class="lead">Groups customers into segments purely from their income and spending patterns —
+    no labels are given to the algorithm. It just finds natural groupings.</p>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="workspace">
+
+      <div class="panel reveal">
+        <h3>🛍️ New Customer</h3>
+        <p class="sub">Place a new customer on the map and choose how many segments to form.</p>
+
+        <div class="field">
+          <label>Annual Income (₹k) <span class="val" id="incomeVal">50</span></label>
+          <input type="range" id="incomeRange" min="0" max="140" step="1" value="50">
+        </div>
+        <div class="field">
+          <label>Spending Score (1–100) <span class="val" id="spendVal">60</span></label>
+          <input type="range" id="spendRange" min="0" max="100" step="1" value="60">
+        </div>
+        <div class="field">
+          <label>Number of Clusters (k) <span class="val" id="kVal">5</span></label>
+          <input type="range" id="kRange" min="2" max="8" step="1" value="5">
+          <div class="hint">Try changing k to see the segments reshape.</div>
+        </div>
+
+        <button class="btn btn-primary run-btn" id="clusterBtn">Run Clustering →</button>
+
+        <div class="loading-wrap" id="loadingWrap">
+          <div class="spinner"></div>
+          <span>Running R model (kmeans) on customer data…</span>
+        </div>
+        <div class="error-banner" id="errorBanner"></div>
+      </div>
+
+      <div class="panel results" id="resultsPanel">
+        <h3>🔵 Segmentation Result</h3>
+
+        <div class="center" style="margin-bottom:18px;">
+          <span class="cluster-badge" id="clusterBadge">Cluster —</span>
+        </div>
+
+        <div class="metric-row">
+          <div class="metric-card highlight">
+            <div class="label">Assigned Segment</div>
+            <div class="value" id="mCluster">—</div>
+          </div>
+          <div class="metric-card">
+            <div class="label">Variance Explained</div>
+            <div class="value" id="mVar">—</div>
+          </div>
+        </div>
+
+        <div class="explanation" id="explanationBox"></div>
+
+        <div class="chart-wrap">
+          <canvas id="kmChart" height="270"></canvas>
+        </div>
+        <div class="legend-row" id="legendRow"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="info-tabs reveal">
+      <button class="info-tab-btn active" data-tab="how">How it Works</button>
+      <button class="info-tab-btn" data-tab="dataset">Dataset</button>
+      <button class="info-tab-btn" data-tab="real">Real-World Use</button>
+    </div>
+
+    <div class="info-tab-panel active" id="tab-how">
+      <div class="panel">
+        <p>K-Means starts by placing <code>k</code> random cluster centers, then repeats two steps
+        until stable: (1) assign every point to its nearest center, and (2) move each center to the
+        average position of the points assigned to it. There are no labels anywhere in this process —
+        the algorithm only looks at how close points are to each other, which is what makes it
+        <strong>unsupervised</strong>.</p>
+      </div>
+    </div>
+
+    <div class="info-tab-panel" id="tab-dataset">
+      <div class="panel">
+        <table class="dataset-table">
+          <tr><th>Property</th><th>Value</th></tr>
+          <tr><td>Dataset name</td><td>Mall Customers (synthetic, Mall-Customers-style)</td></tr>
+          <tr><td>Rows</td><td>200 customers</td></tr>
+          <tr><td>Columns</td><td>2 — annual_income_k, spending_score</td></tr>
+          <tr><td>Target variable</td><td>None — this is unsupervised</td></tr>
+          <tr><td>Why this dataset</td><td>Two features with naturally separated groups make the clusters easy to see and explain visually.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="info-tab-panel" id="tab-real">
+      <div class="real-world-box">
+        <strong>Where this is used in the real world</strong>
+        Marketing teams use customer segmentation like this to target promotions, e-commerce sites use
+        it for product recommendations, and it also powers image compression and document grouping.
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/kmeans.js') }}"></script>
+{% endblock %}

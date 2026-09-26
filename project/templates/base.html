@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Neuralis — ML Web Portfolio{% endblock %}</title>
+<meta name="description" content="An interactive Machine Learning portfolio showcasing Linear Regression, Logistic Regression, K-Means Clustering and Hierarchical Clustering, powered by Flask and R.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% block extra_css %}{% endblock %}
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+</head>
+<body{% block body_attrs %}{% endblock %}>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="/" class="brand"><span class="brand-dot"></span> Neuralis</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/linear-regression">Linear Regression</a>
+      <a href="/logistic-regression">Logistic Regression</a>
+      <a href="/kmeans">K-Means</a>
+      <a href="/hierarchical">Hierarchical</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+  </div>
+</nav>
+
+{% block content %}{% endblock %}
+
+<footer>
+  <div class="container">
+    <div class="brand"><span class="brand-dot"></span> Neuralis</div>
+    <p style="margin:0;">A supervised + unsupervised Machine Learning portfolio · Flask + R · Built for academic demonstration</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<script src="{{ url_for('static', filename='js/chart-fallback.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script>AOS.init({ duration: 700, once: true, offset: 60 });</script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

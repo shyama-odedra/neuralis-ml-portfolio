@@ -1,0 +1,41 @@
+/* Logistic Regression — Pink / Peach / Coral, decision-boundary concept */
+body {
+  --accent: #f0709b;
+  --accent-2: #ff9a76;
+  --accent-soft: #fff0f2;
+  --tint-a: var(--baby-pink);
+  --tint-b: var(--peach);
+}
+
+.log-hero {
+  background: linear-gradient(180deg, #fff1ed 0%, var(--cream) 100%);
+  position: relative;
+}
+.log-shape {
+  position: absolute; border-radius: 40%;
+  opacity: .5; filter: blur(2px); z-index: 0;
+  animation: logDrift 9s ease-in-out infinite;
+}
+.log-shape.s1 { width: 140px; height: 140px; background: var(--baby-pink); top: 12%; left: 6%; }
+.log-shape.s2 { width: 100px; height: 100px; background: var(--peach); bottom: 10%; right: 10%; animation-delay: -3s; }
+@keyframes logDrift {
+  0%, 100% { transform: translate(0,0) rotate(0deg); }
+  50% { transform: translate(10px,-14px) rotate(12deg); }
+}
+
+.class-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border-radius: 999px; font-weight: 700; font-family: var(--font-head);
+  font-size: 1.15rem;
+}
+.class-chip.pass { background: #e2f8ee; color: #2c8a5c; }
+.class-chip.fail { background: #fde7e7; color: #c94b4b; }
+.class-chip .pulse {
+  width: 10px; height: 10px; border-radius: 50%; background: currentColor;
+  box-shadow: 0 0 0 0 currentColor; animation: chipPulse 1.6s infinite;
+}
+@keyframes chipPulse {
+  0% { box-shadow: 0 0 0 0 rgba(0,0,0,.25); }
+  70% { box-shadow: 0 0 0 10px rgba(0,0,0,0); }
+  100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
+}

@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% block title %}Neuralis — Interactive Machine Learning Portfolio{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+  <div class="hero-blob b1"></div>
+  <div class="hero-blob b2"></div>
+  <div class="hero-blob b3"></div>
+  <div class="container hero-inner">
+    <div class="eyebrow" data-aos="fade-down">🤖 Flask · R · Real ML, Live</div>
+    <h1 data-aos="fade-up">Four algorithms. <span>One elegant playground.</span></h1>
+    <p class="lead" data-aos="fade-up" data-aos-delay="100">
+      Neuralis is an interactive Machine Learning portfolio where every prediction, cluster and
+      metric is computed live by real models running in R — nothing here is hard-coded.
+    </p>
+    <div class="hero-cta" data-aos="fade-up" data-aos-delay="200">
+      <a href="#explore" class="btn btn-primary">Explore Models →</a>
+      <a href="#architecture" class="btn btn-ghost">How it works</a>
+    </div>
+
+    <div class="hero-stats" data-aos="fade-up" data-aos-delay="300">
+      <div class="hero-stat"><strong data-count="4">0</strong><span>ML Algorithms</span></div>
+      <div class="hero-stat"><strong data-count="2">0</strong><span>Learning Types</span></div>
+      <div class="hero-stat"><strong data-count="100" data-suffix="%">0</strong><span>Real Computation</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ML EXPLAINER -->
+<section class="section">
+  <div class="container">
+    <div class="center reveal">
+      <div class="eyebrow">The Basics</div>
+      <h2>What is Machine Learning?</h2>
+      <p class="mx-auto" style="max-width:640px;">
+        Machine Learning lets a computer find patterns in data and use them to make predictions or
+        discover structure — without being explicitly programmed with fixed rules. Broadly, it splits
+        into two families, both demonstrated in this project.
+      </p>
+    </div>
+
+    <div class="concept-grid">
+      <div class="concept-card reveal" style="--tint:var(--lavender)">
+        <span class="concept-tag">Supervised</span>
+        <h3 style="margin-top:14px;">Learning with labeled answers</h3>
+        <p>The model is trained on examples that already have a known outcome (a price, a pass/fail
+        label) and learns the relationship between inputs and that outcome.</p>
+        <ul>
+          <li>Linear Regression — predicts a continuous number</li>
+          <li>Logistic Regression — predicts a category</li>
+        </ul>
+      </div>
+      <div class="concept-card reveal" style="--tint:var(--mint)">
+        <span class="concept-tag" style="background:var(--mint);color:#2c8a76;">Unsupervised</span>
+        <h3 style="margin-top:14px;">Learning without answers</h3>
+        <p>The model only sees the input data — no labels — and must discover natural groupings or
+        structure on its own.</p>
+        <ul>
+          <li>K-Means Clustering — groups points by similarity</li>
+          <li>Hierarchical Clustering — builds a tree of nested groups</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALGORITHM CARDS -->
+<section class="section section-tight" id="explore" style="background:linear-gradient(180deg, transparent, var(--accent-soft) 40%, transparent);">
+  <div class="container">
+    <div class="center reveal">
+      <div class="eyebrow">Explore Models</div>
+      <h2>Four live, interactive modules</h2>
+      <p class="mx-auto" style="max-width:560px;">Each page runs a real R model behind the scenes. Enter your own values and watch the result — and the visualization — update instantly.</p>
+    </div>
+
+    <div class="algo-grid">
+      <a href="/linear-regression" class="algo-card reg reveal">
+        <span class="badge">Supervised · Regression</span>
+        <div class="algo-icon">🏡</div>
+        <h3>Linear Regression</h3>
+        <p>Predict a house's price from its area, bedrooms and age using a real multivariate regression model.</p>
+        <span class="go">Open module →</span>
+      </a>
+      <a href="/logistic-regression" class="algo-card cls reveal">
+        <span class="badge">Supervised · Classification</span>
+        <div class="algo-icon">🎓</div>
+        <h3>Logistic Regression</h3>
+        <p>Predict whether a student passes based on study hours and attendance, with a live decision boundary.</p>
+        <span class="go">Open module →</span>
+      </a>
+      <a href="/kmeans" class="algo-card km reveal">
+        <span class="badge">Unsupervised · Clustering</span>
+        <div class="algo-icon">🛍️</div>
+        <h3>K-Means Clustering</h3>
+        <p>Segment customers into groups by income and spending score — see exactly which segment yours falls into.</p>
+        <span class="go">Open module →</span>
+      </a>
+      <a href="/hierarchical" class="algo-card hier reveal">
+        <span class="badge">Unsupervised · Clustering</span>
+        <div class="algo-icon">🌸</div>
+        <h3>Hierarchical Clustering</h3>
+        <p>Watch a real dendrogram grow from Iris flower measurements and compare it to the true species.</p>
+        <span class="go">Open module →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section class="section">
+  <div class="container">
+    <div class="center reveal">
+      <div class="eyebrow">Under the Hood</div>
+      <h2>Technology Stack</h2>
+    </div>
+    <div class="tech-strip reveal">
+      <div class="tech-pill"><span class="dot" style="background:#e0685f"></span> HTML5</div>
+      <div class="tech-pill"><span class="dot" style="background:#5f9be0"></span> CSS3</div>
+      <div class="tech-pill"><span class="dot" style="background:#e8c94a"></span> JavaScript</div>
+      <div class="tech-pill"><span class="dot" style="background:#4e8f6c"></span> Flask (Python)</div>
+      <div class="tech-pill"><span class="dot" style="background:#3f7cad"></span> R</div>
+      <div class="tech-pill"><span class="dot" style="background:#a892ec"></span> Chart.js</div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section class="section section-tight" id="architecture">
+  <div class="container">
+    <div class="center reveal">
+      <div class="eyebrow">Architecture</div>
+      <h2>How a prediction actually happens</h2>
+      <p class="mx-auto" style="max-width:600px;">No result on this site is faked. Every click runs this exact pipeline, end to end.</p>
+    </div>
+    <div class="flow reveal">
+      <div class="flow-step">You enter data</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">JavaScript validates &amp; sends it</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">Flask receives the request</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">Flask runs the R script</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">R fits/uses the model</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">Result renders &amp; animates</div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

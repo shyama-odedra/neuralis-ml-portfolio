@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block title %}Linear Regression — Neuralis{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/linear_regression.css') }}">{% endblock %}
+
+{% block content %}
+<section class="page-hero lr-hero">
+  <div class="lr-grid-bg"></div>
+  <div class="lr-dot" style="top:18%; left:10%;"></div>
+  <div class="lr-dot" style="top:60%; left:85%; animation-delay:-2s;"></div>
+  <div class="lr-dot" style="top:75%; left:20%; animation-delay:-4s;"></div>
+  <div class="container">
+    <a href="/" class="back-link">← Back to home</a>
+    <div class="page-kicker">Supervised Learning · Regression</div>
+    <h1>Linear Regression</h1>
+    <p class="lead">Predicts a continuous number — here, a house's price — by fitting a straight-line
+    relationship between the price and features like area, bedrooms and age.</p>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="workspace">
+
+      <!-- INPUT PANEL -->
+      <div class="panel reveal">
+        <h3>🏡 House Details</h3>
+        <p class="sub">Adjust the values, then run the model to get a real predicted price.</p>
+
+        <div class="field">
+          <label>Area (sq. ft.) <span class="val" id="areaVal">1800</span></label>
+          <input type="range" id="areaRange" min="400" max="3600" step="20" value="1800">
+        </div>
+        <div class="field">
+          <label>Bedrooms <span class="val" id="bedroomsVal">3</span></label>
+          <input type="range" id="bedroomsRange" min="1" max="6" step="1" value="3">
+        </div>
+        <div class="field">
+          <label>Age of Property (years) <span class="val" id="ageVal">5</span></label>
+          <input type="range" id="ageRange" min="0" max="30" step="1" value="5">
+        </div>
+
+        <button class="btn btn-primary run-btn" id="predictBtn">Predict Price →</button>
+
+        <div class="loading-wrap" id="loadingWrap">
+          <div class="spinner"></div>
+          <span>Running R model (lm) on the training data…</span>
+        </div>
+        <div class="error-banner" id="errorBanner"></div>
+      </div>
+
+      <!-- RESULTS PANEL -->
+      <div class="panel results" id="resultsPanel">
+        <h3>📊 Prediction Result</h3>
+        <div class="metric-row">
+          <div class="metric-card highlight">
+            <div class="label">Predicted Price</div>
+            <div class="value" id="mPrice">—</div>
+          </div>
+          <div class="metric-card">
+            <div class="label">R² Score</div>
+            <div class="value" id="mR2">—</div>
+          </div>
+          <div class="metric-card">
+            <div class="label">RMSE</div>
+            <div class="value" id="mRmse">—</div>
+          </div>
+        </div>
+
+        <div class="explanation" id="explanationBox"></div>
+
+        <div class="chart-wrap">
+          <canvas id="regChart" height="260"></canvas>
+        </div>
+        <div class="legend-row">
+          <span><span class="legend-dot" style="background:#c9bffc;"></span>Training houses</span>
+          <span><span class="legend-dot" style="background:#8f7bea;"></span>Regression line (area only, for illustration)</span>
+          <span><span class="legend-dot" style="background:#ff6f91;"></span>Your prediction</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- INFO TABS -->
+<section class="section">
+  <div class="container">
+    <div class="info-tabs reveal">
+      <button class="info-tab-btn active" data-tab="how">How it Works</button>
+      <button class="info-tab-btn" data-tab="dataset">Dataset</button>
+      <button class="info-tab-btn" data-tab="real">Real-World Use</button>
+    </div>
+
+    <div class="info-tab-panel active" id="tab-how">
+      <div class="panel">
+        <p>Linear Regression finds the straight line (or, with multiple features, a flat plane) that
+        best fits the training data by minimizing the squared distance between the line and every
+        actual data point. Formally, it estimates coefficients
+        <code>price = b₀ + b₁·area + b₂·bedrooms + b₃·age</code> that minimize the total squared error.
+        Once fitted, the same formula is used to predict the price of any new house.</p>
+      </div>
+    </div>
+
+    <div class="info-tab-panel" id="tab-dataset">
+      <div class="panel">
+        <table class="dataset-table">
+          <tr><th>Property</th><th>Value</th></tr>
+          <tr><td>Dataset name</td><td>House Prices (synthetic, realistic)</td></tr>
+          <tr><td>Rows</td><td>120 houses</td></tr>
+          <tr><td>Columns</td><td>4 — area_sqft, bedrooms, age_years, price</td></tr>
+          <tr><td>Features used</td><td>area_sqft, bedrooms, age_years</td></tr>
+          <tr><td>Target variable</td><td>price</td></tr>
+          <tr><td>Why this dataset</td><td>Small, fast to fit, and every feature has an intuitive, explainable effect on price — ideal for a viva walkthrough.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="info-tab-panel" id="tab-real">
+      <div class="real-world-box">
+        <strong>Where this is used in the real world</strong>
+        Real-estate platforms (like Zillow's "Zestimate"), insurance premium pricing, salary
+        estimation, and demand forecasting all use linear regression as a fast, interpretable
+        baseline model.
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/linear_regression.js') }}"></script>
+{% endblock %}

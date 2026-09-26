@@ -1,0 +1,41 @@
+/* Linear Regression — Lavender / Powder Blue, mathematical-grid concept */
+body {
+  --accent: #8f7bea;
+  --accent-2: #6fb0e0;
+  --accent-soft: #efeaff;
+  --tint-a: var(--lavender);
+  --tint-b: var(--powder-blue);
+}
+
+.lr-hero {
+  background:
+    linear-gradient(180deg, #f3efff 0%, var(--cream) 100%);
+  position: relative;
+}
+.lr-grid-bg {
+  position: absolute; inset: 0; z-index: 0; opacity: .5;
+  background-image:
+    linear-gradient(rgba(143,123,234,0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(143,123,234,0.12) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 40%, transparent 90%);
+}
+.lr-dot {
+  position: absolute; width: 9px; height: 9px; border-radius: 50%;
+  background: var(--accent-2); opacity: .55; z-index: 0;
+  animation: lrFloat 7s ease-in-out infinite;
+}
+@keyframes lrFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
+}
+
+.regression-line-anim {
+  position: relative;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transform-origin: left;
+  animation: growLine 1.4s ease forwards;
+}
+@keyframes growLine { from { transform: scaleX(0); } to { transform: scaleX(1); } }

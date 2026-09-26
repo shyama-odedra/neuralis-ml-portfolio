@@ -1,0 +1,31 @@
+/* Hierarchical Clustering — Lilac / Cream, growing-tree / dendrogram concept */
+body {
+  --accent: #9b6fd6;
+  --accent-2: #c98ae0;
+  --accent-soft: #f4ecff;
+  --tint-a: var(--lilac);
+  --tint-b: var(--baby-pink);
+}
+
+.hc-hero { background: linear-gradient(180deg, #f6efff 0%, var(--cream) 100%); position: relative; }
+.hc-leaf {
+  position: absolute; border-radius: 50% 0 50% 0; opacity: .5; z-index: 0;
+  animation: hcSway 7s ease-in-out infinite;
+}
+@keyframes hcSway {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  50% { transform: rotate(8deg) translateY(-10px); }
+}
+
+.dendro-wrap { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-md); padding: 16px; overflow-x: auto; }
+.dendro-wrap svg { display: block; margin: 0 auto; }
+
+.view-toggle { display: flex; gap: 8px; margin-bottom: 14px; }
+.view-toggle button {
+  flex: 1; padding: 9px 14px; border-radius: 999px; border: 1px solid var(--line);
+  background: #fff; font-size: .85rem; font-weight: 600; cursor: pointer; color: var(--ink-soft);
+  transition: all .2s ease;
+}
+.view-toggle button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.purity-ring-wrap { display: flex; align-items: center; gap: 18px; }

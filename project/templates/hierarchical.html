@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block title %}Hierarchical Clustering — Neuralis{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/hierarchical.css') }}">{% endblock %}
+
+{% block content %}
+<section class="page-hero hc-hero">
+  <div class="hc-leaf" style="width:90px;height:90px;background:var(--lilac);top:16%;left:8%;"></div>
+  <div class="hc-leaf" style="width:60px;height:60px;background:var(--baby-pink);bottom:14%;right:12%;animation-delay:-3s;"></div>
+  <div class="container">
+    <a href="/" class="back-link">← Back to home</a>
+    <div class="page-kicker">Unsupervised Learning · Clustering</div>
+    <h1>Hierarchical Clustering</h1>
+    <p class="lead">Builds a tree of nested groups from Iris flower measurements — with no species
+    labels given — then we compare what it discovered against the real species.</p>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="workspace">
+
+      <div class="panel reveal">
+        <h3>🌸 Clustering Settings</h3>
+        <p class="sub">Choose how many groups to cut the tree into, and the linkage method.</p>
+
+        <div class="field">
+          <label>Number of Clusters (k) <span class="val" id="kVal">3</span></label>
+          <input type="range" id="kRange" min="2" max="4" step="1" value="3">
+        </div>
+        <div class="field">
+          <label>Linkage Method</label>
+          <select id="methodSelect">
+            <option value="ward.D2" selected>Ward's method (compact clusters)</option>
+            <option value="complete">Complete linkage</option>
+            <option value="average">Average linkage</option>
+          </select>
+        </div>
+
+        <button class="btn btn-primary run-btn" id="runBtn">Run Analysis →</button>
+
+        <div class="loading-wrap" id="loadingWrap">
+          <div class="spinner"></div>
+          <span>Running R model (hclust) on Iris measurements…</span>
+        </div>
+        <div class="error-banner" id="errorBanner"></div>
+      </div>
+
+      <div class="panel results" id="resultsPanel">
+        <h3>🌳 Discovered Structure</h3>
+
+        <div class="metric-row">
+          <div class="metric-card highlight">
+            <div class="label">Clusters Found</div>
+            <div class="value" id="mK">—</div>
+          </div>
+          <div class="metric-card">
+            <div class="label">Cluster Purity</div>
+            <div class="value" id="mPurity">—</div>
+          </div>
+        </div>
+
+        <div class="explanation" id="explanationBox"></div>
+
+        <h4 style="margin-top:26px;">Dendrogram</h4>
+        <div class="dendro-wrap">
+          <svg id="dendroSvg" width="640" height="280"></svg>
+        </div>
+
+        <h4 style="margin-top:26px;">Petal Measurements</h4>
+        <div class="view-toggle">
+          <button class="active" data-view="cluster" id="btnViewCluster">Colour by Discovered Cluster</button>
+          <button data-view="species" id="btnViewSpecies">Colour by True Species</button>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="hcChart" height="240"></canvas>
+        </div>
+        <div class="legend-row" id="legendRow"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="info-tabs reveal">
+      <button class="info-tab-btn active" data-tab="how">How it Works</button>
+      <button class="info-tab-btn" data-tab="dataset">Dataset</button>
+      <button class="info-tab-btn" data-tab="real">Real-World Use</button>
+    </div>
+
+    <div class="info-tab-panel active" id="tab-how">
+      <div class="panel">
+        <p>Hierarchical (agglomerative) clustering starts with every point as its own cluster, then
+        repeatedly merges the two closest clusters until only one remains — recording every merge as a
+        branch in a tree (the <strong>dendrogram</strong>). Cutting the tree at a chosen height produces
+        any number of clusters, without ever re-running the algorithm. No species labels are used to
+        build the tree — we only compare against them afterwards to check how well the structure
+        matches reality.</p>
+      </div>
+    </div>
+
+    <div class="info-tab-panel" id="tab-dataset">
+      <div class="panel">
+        <table class="dataset-table">
+          <tr><th>Property</th><th>Value</th></tr>
+          <tr><td>Dataset name</td><td>Iris (R's built-in dataset, 10 samples per species)</td></tr>
+          <tr><td>Rows</td><td>30 flowers (subsampled for a legible dendrogram)</td></tr>
+          <tr><td>Columns used</td><td>Petal.Length, Petal.Width</td></tr>
+          <tr><td>True labels (for comparison only)</td><td>Species — setosa, versicolor, virginica</td></tr>
+          <tr><td>Why this dataset</td><td>The classic Iris dataset has famously well-separated groups, making the dendrogram and comparison to real species easy to explain in a viva.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="info-tab-panel" id="tab-real">
+      <div class="real-world-box">
+        <strong>Where this is used in the real world</strong>
+        Hierarchical clustering is used in biology for taxonomy trees, in document/text organization,
+        in social network community detection, and in building recommendation category trees.
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/hierarchical.js') }}"></script>
+{% endblock %}

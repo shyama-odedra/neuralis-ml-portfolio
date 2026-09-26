@@ -1,0 +1,25 @@
+/* K-Means Clustering — Mint / Cyan, floating-points-forming-groups concept */
+body {
+  --accent: #2fb595;
+  --accent-2: #4fb8d6;
+  --accent-soft: #e7faf4;
+  --tint-a: var(--mint);
+  --tint-b: var(--powder-blue);
+}
+
+.km-hero { background: linear-gradient(180deg, #e9fbf5 0%, var(--cream) 100%); position: relative; }
+.km-particle {
+  position: absolute; border-radius: 50%; opacity: .55; z-index: 0;
+  animation: kmFloat 8s ease-in-out infinite;
+}
+@keyframes kmFloat {
+  0%, 100% { transform: translate(0,0); }
+  33% { transform: translate(14px,-10px); }
+  66% { transform: translate(-10px,10px); }
+}
+
+.cluster-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-head); font-weight: 700; font-size: 1.3rem;
+  padding: 12px 24px; border-radius: 999px; color: #fff;
+}
